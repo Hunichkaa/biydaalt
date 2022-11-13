@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<script type="text/javascript" src="jquery-3.4.1.js"></script>
+		<script
+			src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"
+			type="text/javascript"
+		></script>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap"
+			rel="stylesheet"
+		/>
+		<style type="text/css">
+			html , body{
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				font-family: 'Baloo 2', cursive;
+			}
+			.container{
+				height: 650px;
+				width: 450px;
+				border: 1px solid grey;
+				border-radius: 20px;
+				background-image: url("back_zurag.png");
+			}
+			.header{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				font-size: 20px;
+			}
+			.mainAction(){
+				display: flex;
+			}
+			.btnClass{
+				justify-content: center;
+				align-items: center;
+			}
+			.forshagai{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.shagai{
+				display: flex;
+				justify-content: center;
+				position: relative;
+			}
+			.shagai2{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: relative;
+			}
+			.answer{
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				font-size: 15px;
+			}
+			.lastAnswer{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.myBtn{
+				background: darken($red, 1.5%);
+						font-weight: 100;
+						border-radius: 5px;
+			}
+			.myBtn:hover{
+				font-weight: 900;
+				letter-spacing: 1px;
+				border-radius: 10px;
+				width: 120px;
+				animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+				transform: translate3d(0, 0, 0);
+				perspective: 1000px;
+			 }
+
+			.myBtn2{
+				background: darken($red, 1.5%);
+				font-weight: 100;
+				border-radius: 5px;
+			}
+			.myBtn2:hover{
+				font-weight: 900;
+				letter-spacing: 1px;
+				border-radius: 10px;
+			 }
+			 .theImg{
+				cursor: pointer;
+			 }
+			 .theImg2{
+			 	cursor: pointer;
+			 	left: 0px;
+			 	top: 0px;
+			 }
+			 .footer{
+			 	display: flex;
+			 	justify-content: center;
+			 	align-items: center;
+			 }
+			 .quizDetail{
+			 	background: darken($red, 1.5%);
+						font-weight: 100;
+						border-radius: 5px;
+			 }
+			 .quizDetail:hover{
+				background: rgba($red, 0);
+				font-weight: 900;
+				letter-spacing: 1px;
+				border-radius: 10px;
+			 }
+			 .merge{
+			 	display: flex;
+			 	justify-content: center;
+			 	align-items: center;
+			 	flex-wrap: wrap;
+			 	margin-left: 10px;
+			 }
+			 .temee1{
+			 	position: absolute;
+			 	left: 170px;
+			 	top: 30px;
+			 }
+			 .mori1{
+			 	position: absolute;
+			 	left: 30px;
+			 	top: 150px;
+			 }
+			 .honi1{
+			 	position: absolute;
+			 	left: 310px;
+			 	top: 160px;
+			 }
+			 .yamaa1{
+			 	position: absolute;
+			 	left: 170px;
+			 	top: 300px;
+			 }
+			.path {
+				stroke-dasharray: 200;
+				stroke-dashoffset: 100;
+				animation: dash 1s linear alternate;
+				animation-duration: 1500;
+				animation-delay: 100s;
+				display: none;
+			}
+			@keyframes dash {
+			  from {
+			    stroke-dashoffset: 1500;
+			  }
+			  to {
+			    stroke-dashoffset: 0;
+			  }
+			}
+			@keyframes shake {
+			  10%, 90% {
+			    transform: translate3d(-1px, 0, 0);
+			  }
+			  20%, 80% {
+			    transform: translate3d(2px, 0, 0);
+			  }
+
+			  30%, 50%, 70% {
+			    transform: translate3d(-2px, 0, 0);
+			  }
+			  40%, 60% {
+			    transform: translate3d(2px, 0, 0);
+			}
+		</style>
+	</head>
+	<body>
+		<svg height="40" width="500">
+			<line
+				class="path"
+				x1="40"
+				y1="30"
+				x2="450"
+				y2="30"
+				style="stroke: black; stroke-width: 3"
+			/>
+		</svg>
+		<div class="container">
+			<div class="header">
+				<div class="headeritem" style="font-size: 20px">Шагайн мэргэ</div>
+				<div class="btnClass">
+					<button class="myBtn" onclick="quizFunction()">Шагай шидэх</button>
+					<button class="myBtn2" onclick="newgame()">Ахин тоглох</button>
+				</div>
+			</div>
+			<div class="shagai" style="display: flex">
+				<img style="margin: 5px" class="theImg temee1" src="shagai_temee.jpg" />
+				<img style="margin: 5px" class="theImg mori1" src="shagai_mori.jpg" />
+				<img style="margin: 5px" class="theImg honi1" src="shagai_honi.jpg" />
+				<img style="margin: 5px" class="theImg yamaa1" src="shagai_Yamaa.jpg" />
+			</div>
+			<div class="shagai2" style="display: flex; position: relative"></div>
+			<div class="footer">
+				<p class="lastAnswer"></p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function quizFunction() {
+			var temeeCount = 0;
+			moriCount = 0;
+			honiCount = 0;
+			yamaaCount = 0;
+			$('.shagai2').css('display', 'none');
+			$('.shagai').css('display', 'flex');
+			$('.lastAnswer').css('display', 'none');
+			var botChoice;
+			var Temee;
+			var Mori;
+			var Honi;
+			var Yamaa;
+			var value = $('.lastAnswer');
+			for (var i = 0; i < 4; i++) {
+				var botRandom = Math.floor(Math.random() * 4) + 1;
+				switch (botRandom) {
+					case 1:
+						botChoice = 'Temee';
+						break;
+					case 2:
+						botChoice = 'Mori';
+						break;
+					case 3:
+						botChoice = 'Honi';
+						break;
+					case 4:
+						botChoice = 'Yamaa';
+						break;
+				}
+				console.log(botRandom);
+				if (botChoice == 'Temee') temeeCount++;
+				if (botChoice == 'Mori') moriCount++;
+				if (botChoice == 'Honi') honiCount++;
+				if (botChoice == 'Yamaa') yamaaCount++;
+			}
+			setTimeout(function () {
+				if (
+					temeeCount == 4 &&
+					moriCount == 0 &&
+					honiCount == 0 &&
+					yamaaCount == 0
+				) {
+					value.html('Бусдын хорт уршигтай');
+				}
+				if (
+					temeeCount == 3 &&
+					moriCount == 0 &&
+					honiCount == 1 &&
+					yamaaCount == 0
+				) {
+					value.html('Яваандаа горьдлого муу');
+				}
+				if (
+					temeeCount == 3 &&
+					moriCount == 0 &&
+					honiCount == 0 &&
+					yamaaCount == 1
+				) {
+					value.html('Гадны хүмүүс давуу');
+				}
+				if (
+					temeeCount == 2 &&
+					moriCount == 2 &&
+					honiCount == 0 &&
+					yamaaCount == 0
+				) {
+					value.html('Үйлс бүтэмжтэй хэдий ч тэмцэлтэй');
+				}
+				if (
+					temeeCount == 2 &&
+					moriCount == 1 &&
+					honiCount == 1 &&
+					yamaaCount == 0
+				) {
+					value.html('Эд, эсвэл хэл ам ирнэ');
+				}
+				if (
+					temeeCount == 2 &&
+					moriCount == 1 &&
+					honiCount == 0 &&
+					yamaaCount == 1
+				) {
+					value.html('Хэл ам сайн талдаа, баяртай');
+				}
+				if (
+					temeeCount == 2 &&
+					moriCount == 0 &&
+					honiCount == 2 &&
+					yamaaCount == 0
+				) {
+					value.html('Өөрийн талд боловч эргэлзээтэй');
+				}
+				if (
+					temeeCount == 2 &&
+					moriCount == 0 &&
+					honiCount == 0 &&
+					yamaaCount == 2
+				) {
+					value.html('Хэрэг саадгүй');
+				}
+				if (
+					temeeCount == 2 &&
+					moriCount == 0 &&
+					honiCount == 1 &&
+					yamaaCount == 1
+				) {
+					value.html('Бүтэх эсэх эргэлзээтэй');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 1 &&
+					honiCount == 1 &&
+					yamaaCount == 1
+				) {
+					value.html('Тэргүүн төлөг маш сайн');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 2 &&
+					honiCount == 1 &&
+					yamaaCount == 0
+				) {
+					value.html('Баяртай сайн');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 2 &&
+					honiCount == 0 &&
+					yamaaCount == 1
+				) {
+					value.html('Алсын үйлс түргэн бүтнэ');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 1 &&
+					honiCount == 2 &&
+					yamaaCount == 0
+				) {
+					value.html('Эсрэг талын саванд бууна');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 1 &&
+					honiCount == 0 &&
+					yamaaCount == 2
+				) {
+					value.html('Эсэн мэнд удаан жаргана');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 0 &&
+					honiCount == 3 &&
+					yamaaCount == 0
+				) {
+					value.html('Гадны нөлөөгүй');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 0 &&
+					honiCount == 0 &&
+					yamaaCount == 3
+				) {
+					value.html('Үйлс бүтэмж муу');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 0 &&
+					honiCount == 2 &&
+					yamaaCount == 1
+				) {
+					value.html('Үйлс бүтэмж хангалттай бус');
+				}
+				if (
+					temeeCount == 1 &&
+					moriCount == 0 &&
+					honiCount == 1 &&
+					yamaaCount == 2
+				) {
+					value.html('Бусдын талбарт болно');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 4 &&
+					honiCount == 0 &&
+					yamaaCount == 0
+				) {
+					value.html('Хурдан саадгүй');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 0 &&
+					honiCount == 4 &&
+					yamaaCount == 0
+				) {
+					value.html('Алсдаа үйлс саадгүй бүтнэ');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 0 &&
+					honiCount == 0 &&
+					yamaaCount == 4
+				) {
+					value.html('Урт удаан өлзийтэй');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 3 &&
+					honiCount == 1 &&
+					yamaaCount == 0
+				) {
+					value.html('Хурдан ирнэ, очино');
+					('	');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 3 &&
+					honiCount == 0 &&
+					yamaaCount == 1
+				) {
+					value.html('Тэгш сайн');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 2 &&
+					honiCount == 1 &&
+					yamaaCount == 1
+				) {
+					value.html('Өлзийтэй сайн');
+					('	');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 2 &&
+					honiCount == 0 &&
+					yamaaCount == 2
+				) {
+					value.html('Үйлс бүтэмж мөргөлдөөнтэй');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 1 &&
+					honiCount == 3 &&
+					yamaaCount == 2
+				) {
+					value.html('Өөрийн талд бат');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 1 &&
+					honiCount == 0 &&
+					yamaaCount == 3
+				) {
+					value.html('Цагаан хэл амтай');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 1 &&
+					honiCount == 1 &&
+					yamaaCount == 2
+				) {
+					value.html('Хэрэг явдал анхны удаа саадгүй');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 1 &&
+					honiCount == 2 &&
+					yamaaCount == 1
+				) {
+					value.html('Хэрэг явдал саадгүй');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 0 &&
+					honiCount == 3 &&
+					yamaaCount == 1
+				) {
+					value.html('Үйлс бүтэмж сайн');
+				}
+				if (
+					temeeCount == 0 &&
+					moriCount == 0 &&
+					honiCount == 2 &&
+					yamaaCount == 2
+				) {
+					value.html('Хэрэг бүтэх болно');
+				}
+			}, 1800);
+			var temee = '<img style="" class="theImg2" src="shagai_temee.jpg">';
+			var mori = '<img style="" class="theImg2" src="shagai_mori.jpg">';
+			var honi = '<img style="" class="theImg2" src="shagai_honi.jpg">';
+			var yamaa = '<img style="" class="theImg2" src="shagai_Yamaa.jpg">';
+			var imageArr = [temee, mori, honi, yamaa];
+			var countArr = [temeeCount, moriCount, honiCount, yamaaCount];
+			for (var j = 0; j < countArr.length; j++) {
+				for (var k = 1; k <= countArr[j]; k++) {
+					var div = $(imageArr[j]);
+					if ($('.shagai2').children().length == 0) {
+						div.addClass('temee1');
+						$('.shagai2').append(div);
+					} else if ($('.shagai2').children().length == 1) {
+						div.addClass('honi1');
+						$('.shagai2').append(div);
+					} else if ($('.shagai2').children().length == 2) {
+						div.addClass('mori1');
+						$('.shagai2').append(div);
+					} else if ($('.shagai2').children().length == 3) {
+						div.addClass('yamaa1');
+						$('.shagai2').append(div);
+					}
+				}
+			}
+			$('.path').css('display', 'block');
+			$('.path').css('animation-delay', '0s');
+			setTimeout(function () {
+				$('.shagai2').animate({ height: '500px' }, 'slow');
+				$('.shagai2').css('display', 'block');
+				$('.merge').css('display', 'none');
+				$('.theImg2').effect('bounce', { times: 5 }, 300);
+				$('.path').css('display', 'none');
+				$('.shagai').css('display', 'none');
+				$('.lastAnswer').css('display', 'block');
+			}, 1000);
+			var interval = 100;
+			var asdf;
+			var qwe;
+			var arrJpg = [
+				'shagai_temee.jpg',
+				'shagai_mori.jpg',
+				'shagai_honi.jpg',
+				'shagai_Yamaa.jpg',
+			];
+			imageArr.forEach((imageArr, index) => {
+				setTimeout(() => {
+					for (var n = 0; n < 300; n++) {
+						var randPic1 = Math.floor(Math.random() * 4) + 1;
+						switch (randPic1) {
+							case 1:
+								qwe = arrJpg[0];
+								break;
+							case 2:
+								qwe = arrJpg[1];
+								break;
+							case 3:
+								qwe = arrJpg[2];
+								break;
+							case 4:
+								qwe = arrJpg[3];
+								break;
+						}
+						var randPic = Math.floor(Math.random() * 4) + 0;
+						switch (randPic) {
+							case 0:
+								asdf = $('.theImg').eq(randPic).attr('src', qwe);
+								$('.theImg').effect('shake', { times: 3 }, 600);
+								break;
+							case 1:
+								asdf = $('.theImg').eq(randPic).attr('src', qwe);
+								$('.theImg').effect('shake', { times: 3 }, 600);
+								break;
+							case 2:
+								asdf = $('.theImg').eq(randPic).attr('src', qwe);
+								$('.theImg').effect('shake', { times: 3 }, 600);
+								break;
+							case 3:
+								asdf = $('.theImg').eq(randPic).attr('src', qwe);
+								$('.theImg').effect('shake', { times: 3 }, 600);
+								break;
+						}
+					}
+				}, index * interval);
+			});
+		}
+		function newgame() {
+			location.reload(true);
+		}
+	</script>
+</html>
